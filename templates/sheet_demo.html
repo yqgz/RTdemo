@@ -123,6 +123,14 @@
             } else {
                 alert('Error!');
             }
+        },
+            function (result) {
+            if (result.code == undefined) {
+                {#window.location.href = '/login/'#}
+                alert('Undefined!');
+            } else {
+                alert('Error!');
+            }
         })
     }
 

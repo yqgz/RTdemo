@@ -173,10 +173,12 @@ def save_table(request):
             tb = Table(name=name, sort=sort, table_data=data, chp_id=chpid, proj_id=rid)
         else:
             tb.save()
-
     return json_response('保存成功！')
 
-
+#？保存表头？
+def save_table_headers(request):
+    data = request.POST['data']
+    return json_response('保存成功！')
 # 测试章节明细页面用
 def test_load_detail(request, chpid):
     # 章节名称信息。
