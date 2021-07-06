@@ -148,7 +148,7 @@ def sheet_show(request):
     return render(request, "sheet_demo.html", context)
 
 
-# sheet表保存
+# sheet表数据保存
 def save_table(request):
     rid=0,
     tid=0,

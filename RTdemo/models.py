@@ -60,7 +60,7 @@ class Paragraph(models.Model):
 class Table(models.Model):
     name = models.CharField('表名称', max_length=200, null=False)
     sort = models.IntegerField('排序', null=False)
-    table_headers = models.TextField('表格头', null=True, blank=True)
+    # table_headers = models.TextField('表格头', null=True, blank=True)
     chp = models.ForeignKey(Chapter, on_delete=models.CASCADE, db_index=True, default=1)
     temp = models.ForeignKey(Template, on_delete=models.CASCADE, db_index=True, default=1)
     proj = models.ForeignKey(Projects, on_delete=models.CASCADE, db_index=True, blank=True, null=True)
@@ -78,9 +78,9 @@ class TableData(models.Model):
     proj = models.ForeignKey(Projects, on_delete=models.CASCADE, db_index=True, blank=True, null=True)
 
 
-# 表字段（不用）
+# 表头（字段）
 class Column(models.Model):
-    name = models.CharField('列名称', max_length=200, null=False)
+    name = models.CharField('列名', max_length=200, null=False)
     header = models.CharField('二层表头列名', max_length=200, null=True, blank=True)
     table = models.ForeignKey(Table, on_delete=models.CASCADE, db_index=True)
     formula = models.CharField('公式', max_length=500, null=True, blank=True)
