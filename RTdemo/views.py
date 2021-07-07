@@ -179,6 +179,8 @@ def save_table(request):
 def save_table_headers(request):
     data = request.POST['data']
     return json_response('保存成功！')
+
+
 # 测试章节明细页面用
 def test_load_detail(request, chpid):
     # 章节名称信息。

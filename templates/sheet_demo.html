@@ -103,10 +103,12 @@
         let type = $('#type').val();
         let chpid = $('#chpid').val();
         let tempid = $('#tempid').val();
+        let tb=document.getElementById('spreadsheet').getElementsByTagName('thead')
         //表格数据[{}]        {#let json=table.getJson(false)#}
         //表格数据[[]]        {#let tdata=table.getData(false)#}
         let data = JSON.stringify(table.getData(false))
         let column = JSON.stringify(table.getHeaders())
+        let header = JSON.stringify(tb[0])
         {#csrf = $("input[name='csrfmiddlewaretoken']").val()#}
         $.post("{% url 'save_table' %}", {
             sort:tsort,
