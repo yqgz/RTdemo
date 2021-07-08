@@ -8,14 +8,16 @@ from django.db.models import Q
 import os
 from django.http import HttpResponse
 
+
 def test(request):
     cid = 1
     chapter = chapter_name(cid)
     return json_response(str(chapter['sort']) + '.' + chapter['name'])
 
+
 def test1(request):
     p_val_list = Parameters.objects.filter(chp_id=1).values("id", "name", "display_name", "testvalue__value",
-                                                                "testvalue__id", "unit", "testvalue__proj_id")
+                                                            "testvalue__id", "unit", "testvalue__proj_id")
     context = {'list': p_val_list}
     return render(request, "test1.html", context)
 
@@ -148,13 +150,18 @@ def sheet_show(request):
     return render(request, "sheet_demo.html", context)
 
 
+# CSV加载sheet
+def csv_show(request):
+    return render(request, "CSVSheet.html")
+
+
 # sheet表数据保存
 def save_table(request):
-    rid=0,
-    tid=0,
-    name='',
-    sort=0,
-    chpid=0
+    rid = 0,
+    tid = 0,
+    name = '',
+    sort = 0,
+    chpid = 0
     data = request.POST['data']
     # 给模板设置表值
     if type == 'template':
@@ -175,7 +182,8 @@ def save_table(request):
             tb.save()
     return json_response('保存成功！')
 
-#？保存表头？
+
+# ？保存表头？
 def save_table_headers(request):
     data = request.POST['data']
     return json_response('保存成功！')

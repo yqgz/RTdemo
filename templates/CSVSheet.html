@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://bossanova.uk/jspreadsheet/v4/jexcel.css" type="text/css"/>
+    <script type="text/javascript" src="/static/jspreadsheet/dist/index.js "></script>
+    <script src="https://jsuites.net/v4/jsuites.js"></script>
+    <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/static/jspreadsheet/jssstyle.css">
+    <title>CSV</title>
+</head>
+<body>
+<div class="container">
+    <form>
+        <h3>表<input type="text" id="tsort" value="28"> <input type="text" id="tname" value="稳定性结果表"></h3>
+        <div><input type="hidden" id="type" value="template">
+        <input type="text" id="chpid" value="6">
+        <input type="text" id="tempid" value="1"></div>
+        <div id="spreadsheet"></div>
+        <div>
+            {% comment %}<input type='button' value='新建' onclick="$('#spreadsheet').jspreadsheet('insertRow')"/>
+            <input type='button' value='保存' id="save" onclick="saveTable()"/></div>{% endcomment %}
+
+    </form>
+</div>
+<script>
+    mySpreadsheet = jspreadsheet(document.getElementById('spreadsheet'), {
+    csv: '/static/jspreadsheet/files/T28.csv',
+    tableOverflow: true,
+    columns: [
+        { type: 'text', width: '80px' },
+        { type: 'text', width: '80px' },
+        { type: 'text', width: '120px',},
+        { type: 'text', width: '80px' },
+        { type: 'text', width: '120px'},
+         { type: 'text', width: '80px' },
+        { type: 'text', width: '120px'},
+     ],
+     license: 'NDc4ZDc3NWJiNjIzNzU4MTVmNjA4MjdlYjk1MjlmZDZiYzk4MWM3ZmM2OTdiZDczOWQ2MGRkZjdhNTc4ODExNmMyMDZkZDIwNzExYzJmM2EwOTBiYWUxM2M0NGY1YzNiZmVmZTY1OGY5OWI2ZDg2NDMyNjgwOTFhZGQ2MzVlYmEsZXlKdVlXMWxJam9pY0dGMWJDNW9iMlJsYkNJc0ltUmhkR1VpT2pFMk5EY3pPRGc0TURBc0ltUnZiV0ZwYmlJNld5SnFjMmhsYkd3dWJtVjBJaXdpWTI5a1pYTmhibVJpYjNndVkyOXRJaXdpYW5Od2NtVmhaSE5vWldWMExtTnZiU0lzSW1OellpNWhjSEFpTENKalpIQnVMbWx2SWl3aWJHOWpZV3hvYjNOMElsMHNJbkJzWVc0aU9pSXlJbjA9',
+});
+</script>
+</body>
+</html>
