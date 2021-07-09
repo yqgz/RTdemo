@@ -3,7 +3,7 @@
 <meta charset="UTF-8">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 {#<script src="https://bossanova.uk/jspreadsheet/v4/jexcel.js"></script>#}
-<link rel="stylesheet" href="https://bossanova.uk/jspreadsheet/v4/jexcel.css" type="text/css" />
+<link rel="stylesheet" href="https://bossanova.uk/jspreadsheet/v4/jexcel.css" type="text/css"/>
 <script type="text/javascript" src="/static/jspreadsheet/dist/index.js "></script>
 <script src="https://jsuites.net/v4/jsuites.js"></script>
 {#<link rel="stylesheet" type="text/css" href="/static/jspreadsheet/jspreadsheet.css">#}
@@ -12,10 +12,11 @@
 <body>
 <div class="container">
     <form>
+        {% csrf_token %}
         <h3>表<input type="text" id="tsort" value="28"> <input type="text" id="tname" value="稳定性结果表"></h3>
         <div><input type="hidden" id="type" value="template">
-        <input type="text" id="chpid" value="6">
-        <input type="text" id="tempid" value="1"></div>
+            <input type="text" id="chpid" value="6">
+            <input type="text" id="tempid" value="1"></div>
         <div id="spreadsheet"></div>
         {#    <div id="spreadsheet2"></div>#}
         <div>
@@ -104,35 +105,38 @@
         let type = $('#type').val();
         let chpid = $('#chpid').val();
         let tempid = $('#tempid').val();
-        let tb=document.getElementById('spreadsheet').getElementsByTagName('thead')
+        let tb = document.getElementById('spreadsheet').getElementsByTagName('thead')
         //表格数据[{}]        {#let json=table.getJson(false)#}
         //表格数据[[]]        {#let tdata=table.getData(false)#}
         let data = JSON.stringify(table.getData(false))
         let column = JSON.stringify(table.getHeaders())
-        let header = JSON.stringify(tb[0])
-        {#csrf = $("input[name='csrfmiddlewaretoken']").val()#}
-        $.post("{% url 'save_table' %}", {
-            sort:tsort,
-            name:tname,
-            type:type,
-            chpid:chpid,
-            rid:tempid,
+        {#let header = JSON.stringify(tb[0])#}
+        csrf = $("input[name='csrfmiddlewaretoken']").val()
+        $.ajax({
+            url: "{% url 'save_table' %}",
+            type: 'post',
+            contentType: "application/json; charset=utf-8",
+            tid:1,
+            type: type,
+            chpid: chpid,
+            rid: tempid,
             data: data,
-            {#csrfmiddlewaretoken: csrf   #}
-        }, function (result) {
-            if (result.code == undefined) {
-                {#window.location.href = '/login/'#}
-                alert('Undefined!');
-            } else {
-                alert('Error!');
-            }
-        },
-            function (result) {
-            if (result.code == undefined) {
-                {#window.location.href = '/login/'#}
-                alert('Undefined!');
-            } else {
-                alert('Error!');
+            csrfmiddlewaretoken: csrf,
+            success: function (result) {
+                if (result.code == undefined) {
+                    {#window.location.href = '/login/'#}
+                    alert('Undefined!');
+                } else {
+                    alert('Error!');
+                }
+            },
+            error: function (result) {
+                if (result.code == undefined) {
+                    {#window.location.href = '/login/'#}
+                    alert('Undefined!');
+                } else {
+                    alert('Error!');
+                }
             }
         })
     }

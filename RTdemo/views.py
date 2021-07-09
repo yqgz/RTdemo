@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.db import connection
-from .models import Chapter, TestValue, Parameters, Projects, Paragraph, Table, Template, TestValue, ParameterValue
+from .models import Chapter, TestValue, Parameters, Projects, Paragraph, Table, Template, TestValue, ParameterValue, TableData
 from RTdemo.common.response import json_response, json_error, read_file
 from django.db import models
 from django.db.models import Q
@@ -157,27 +157,24 @@ def csv_show(request):
 
 # sheet表数据保存
 def save_table(request):
-    rid = 0,
-    tid = 0,
-    name = '',
-    sort = 0,
-    chpid = 0
+    rid = request.POST['rid'],
+    tid = request.POST['tid'],
     data = request.POST['data']
     # 给模板设置表值
     if type == 'template':
-        tb = Table.objects.filter(temp_id=rid, id=tid)
+        tb = TableData.objects.filter(temp_id=rid, tableid=tid)
         # 对象为空，不存在，需要插入
         if not tb:
-            tb = Table(name=name, sort=sort, table_data=data, chp_id=chpid, temp_id=rid)
+            tb = TableData(data=data,tableid=tid, temp_id=rid)
         # 更新
         else:
             tb.save()
     # 给项目表填值
     elif type == 'project':
-        tb = Table.objects.filter(proj_id=rid, id=tid)
+        tb = TableData.objects.filter(proj_id=rid, tableid=tid)
         # 对象为空，不存在，需要插入
         if not tb:
-            tb = Table(name=name, sort=sort, table_data=data, chp_id=chpid, proj_id=rid)
+            tb = TableData(data=data, tableid=tid, proj_id=rid)
         else:
             tb.save()
     return json_response('保存成功！')

@@ -63,7 +63,7 @@ class Table(models.Model):
     # table_headers = models.TextField('表格头', null=True, blank=True)
     chp = models.ForeignKey(Chapter, on_delete=models.CASCADE, db_index=True, default=1)
     temp = models.ForeignKey(Template, on_delete=models.CASCADE, db_index=True, default=1)
-    proj = models.ForeignKey(Projects, on_delete=models.CASCADE, db_index=True, blank=True, null=True)
+    # proj = models.ForeignKey(Projects, on_delete=models.CASCADE, db_index=True, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -73,7 +73,7 @@ class Table(models.Model):
 class TableData(models.Model):
     table = models.ForeignKey(Table, on_delete=models.CASCADE, db_index=True, default=1)
     data = models.TextField('表值', null=True, blank=True)
-    chp = models.ForeignKey(Chapter, on_delete=models.CASCADE, db_index=True, default=1)
+    # chp = models.ForeignKey(Chapter, on_delete=models.CASCADE, db_index=True, default=1)
     temp = models.ForeignKey(Template, on_delete=models.CASCADE, db_index=True, default=1)
     proj = models.ForeignKey(Projects, on_delete=models.CASCADE, db_index=True, blank=True, null=True)
 
